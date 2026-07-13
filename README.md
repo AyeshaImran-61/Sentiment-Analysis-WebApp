@@ -70,6 +70,11 @@ The trained Machine Learning model is exposed through a FastAPI REST API and con
 - GitHub
 
 ---
+## 🌐 Live Demo
+
+Live Application:
+
+https://vercel.com/ayesha-imran/sentiment-analysis-web-app
 
 ## 📂 Project Structure
 
