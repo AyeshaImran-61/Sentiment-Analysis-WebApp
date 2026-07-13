@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import joblib
 
-from utils import preprocess_text
+from api.utils import preprocess_text
 
 app = FastAPI(
     title="Sentiment Analysis API",
@@ -18,8 +18,12 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-model = joblib.load("model.pkl")
-vectorizer = joblib.load("vectorizer.pkl")
+import os
+
+BASE_DIR = os.path.dirname(__file__)
+
+model = joblib.load(os.path.join(BASE_DIR, "model.pkl"))
+vectorizer = joblib.load(os.path.join(BASE_DIR, "vectorizer.pkl"))
 
 
 class TextRequest(BaseModel):
