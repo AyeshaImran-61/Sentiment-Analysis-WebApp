@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import joblib
 
-from api.utils import preprocess_text
+from utils import preprocess_text
 
 app = FastAPI(
     title="Sentiment Analysis API",
