@@ -13,7 +13,7 @@
   "routes": [
     {
       "src": "/predict",
-      "dest": "api/main.py"
+      "dest": "/api/main.py"
     },
     {
       "src": "/",

@@ -12,7 +12,8 @@ async function predictSentiment() {
 
     try {
 
-        const response = await fetch("http://127.0.0.1:8000/predict", {
+        // Call the deployed backend
+        const response = await fetch("/predict", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -22,20 +23,21 @@ async function predictSentiment() {
             })
         });
 
+        if (!response.ok) {
+            throw new Error("Server Error");
+        }
+
         const data = await response.json();
 
         document.getElementById("loading").style.display = "none";
 
-        let emoji = "";
+        let emoji = "😐";
 
         if (data.prediction === "Positive") {
             emoji = "😊";
         }
         else if (data.prediction === "Negative") {
             emoji = "😞";
-        }
-        else {
-            emoji = "😐";
         }
 
         document.getElementById("result").innerHTML = `
@@ -48,8 +50,10 @@ async function predictSentiment() {
 
         document.getElementById("loading").style.display = "none";
 
-        document.getElementById("result").innerHTML =
-            "<h2>❌ Could not connect to the backend.</h2>";
+        document.getElementById("result").innerHTML = `
+            <h2>❌ Backend Error</h2>
+            <p>${error.message}</p>
+        `;
 
         console.error(error);
     }
